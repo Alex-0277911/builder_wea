@@ -1,0 +1,40 @@
+@startuml
+set namespaceSeparator ::
+
+class "builder_wea::builder_wea.dart::Weather" {
+  +String location
+  +double temperature
+  +double humidity
+  +double windSpeed
+  +String toString()
+}
+
+abstract class "builder_wea::builder_wea.dart::WeatherBuilder" {
+  +void setLocation()
+  +void setTemperature()
+  +void setHumidity()
+  +void setWindSpeed()
+  +Weather build()
+}
+
+class "builder_wea::builder_wea.dart::ConcreteWeatherBuilder" {
+  +Weather weather
+  +void setLocation()
+  +void setTemperature()
+  +void setHumidity()
+  +void setWindSpeed()
+  +Weather build()
+}
+
+"builder_wea::builder_wea.dart::ConcreteWeatherBuilder" o-- "builder_wea::builder_wea.dart::Weather"
+"builder_wea::builder_wea.dart::WeatherBuilder" <|-- "builder_wea::builder_wea.dart::ConcreteWeatherBuilder"
+
+class "builder_wea::builder_wea.dart::WeatherDirector" {
+  +WeatherBuilder builder
+  +Weather getWeather()
+}
+
+"builder_wea::builder_wea.dart::WeatherDirector" o-- "builder_wea::builder_wea.dart::WeatherBuilder"
+
+
+@enduml
